@@ -1,0 +1,67 @@
+root@goorm:/workspace/MySQL_FX18957# ls
+README.md  goorm.manifest  main.js
+root@goorm:/workspace/MySQL_FX18957# ls
+README.md  book_data.sql  goorm.manifest  main.js
+root@goorm:/workspace/MySQL_FX18957# mysql-ctl cli
+ * Stopping MySQL database server mysqld
+   ...done.
+
+MySQL 5.7 database added.  Please make note of these credentials:
+
+       Root User: root
+   Database Name: mysql
+
+ * Starting MySQL database server mysqld
+No directory, logging in with HOME=/
+   ...done.
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 4
+Server version: 5.7.41-0ubuntu0.18.04.1 (Ubuntu)
+
+Copyright (c) 2000, 2023, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> CREATE DATABASE book_shop
+    -> ;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> use book_shop
+Database changed
+
+mysql> source book_data.sql
+Query OK, 0 rows affected (0.09 sec)
+
+Query OK, 16 rows affected (0.02 sec)
+Records: 16  Duplicates: 0  Warnings: 0
+
+mysql> select * from book;
+ERROR 1146 (42S02): Table 'book_shop.book' doesn't exist
+mysql> select * from books;
++---------+-----------------------------------------------------+--------------+----------------+---------------+----------------+-------+
+| book_id | title                                               | author_fname | author_lname   | released_year | stock_quantity | pages |
++---------+-----------------------------------------------------+--------------+----------------+---------------+----------------+-------+
+|       1 | The Namesake                                        | Jhumpa       | Lahiri         |          2003 |             32 |   291 |
+|       2 | Norse Mythology                                     | Neil         | Gaiman         |          2016 |             43 |   304 |
+|       3 | American Gods                                       | Neil         | Gaiman         |          2001 |             12 |   465 |
+|       4 | Interpreter of Maladies                             | Jhumpa       | Lahiri         |          1996 |             97 |   198 |
+|       5 | A Hologram for the King: A Novel                    | Dave         | Eggers         |          2012 |            154 |   352 |
+|       6 | The Circle                                          | Dave         | Eggers         |          2013 |             26 |   504 |
+|       7 | The Amazing Adventures of Kavalier & Clay           | Michael      | Chabon         |          2000 |             68 |   634 |
+|       8 | Just Kids                                           | Patti        | Smith          |          2010 |             55 |   304 |
+|       9 | A Heartbreaking Work of Staggering Genius           | Dave         | Eggers         |          2001 |            104 |   437 |
+|      10 | Coraline                                            | Neil         | Gaiman         |          2003 |            100 |   208 |
+|      11 | What We Talk About When We Talk About Love: Stories | Raymond      | Carver         |          1981 |             23 |   176 |
+|      12 | Where I'm Calling From: Selected Stories            | Raymond      | Carver         |          1989 |             12 |   526 |
+|      13 | White Noise                                         | Don          | DeLillo        |          1985 |             49 |   320 |
+|      14 | Cannery Row                                         | John         | Steinbeck      |          1945 |             95 |   181 |
+|      15 | Oblivion: Stories                                   | David        | Foster Wallace |          2004 |            172 |   329 |
+|      16 | Consider the Lobster                                | David        | Foster Wallace |          2005 |             92 |   343 |
++---------+-----------------------------------------------------+--------------+----------------+---------------+----------------+-------+
+16 rows in set (0.00 sec)
+
+mysql>

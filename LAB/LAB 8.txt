@@ -1,0 +1,85 @@
+Yêu cầu 1: Thực hiện các truy vấn
+
+SELECT CURTIME();
++-----------+
+| CURTIME() |
++-----------+
+| 07:06:35  |
++-----------+
+1 row in set (0.01 sec)
+
+SELECT CURDATE();
++------------+
+| CURDATE()  |
++------------+
+| 2023-03-17 |
++------------+
+1 row in set (0.00 sec)
+
+SELECT DAYOFWEEK(CURDATE());
++----------------------+
+| DAYOFWEEK(CURDATE()) |
++----------------------+
+|                    6 |
++----------------------+
+1 row in set (0.00 sec)
+
+SELECT DAYOFWEEK(NOW());
++------------------+
+| DAYOFWEEK(NOW()) |
++------------------+
+|                6 |
++------------------+
+1 row in set (0.00 sec)
+
+SELECT DATE_FORMAT(NOW(), '%w') + 1;
++------------------------------+
+| DATE_FORMAT(NOW(), '%w') + 1 |
++------------------------------+
+|                            6 |
++------------------------------+
+1 row in set (0.01 sec)
+
+SELECT DAYNAME(NOW());
++----------------+
+| DAYNAME(NOW()) |
++----------------+
+| Friday         |
++----------------+
+1 row in set (0.00 sec)
+
+SELECT DATE_FORMAT(NOW(), '%W');
++--------------------------+
+| DATE_FORMAT(NOW(), '%W') |
++--------------------------+
+| Friday                   |
++--------------------------+
+1 row in set (0.00 sec)
+
+SELECT DATE_FORMAT(CURDATE(), '%m/%d/%Y');
++------------------------------------+
+| DATE_FORMAT(CURDATE(), '%m/%d/%Y') |
++------------------------------------+
+| 03/17/2023                         |
++------------------------------------+
+1 row in set (0.01 sec)
+
+SELECT DATE_FORMAT(NOW(), '%M %D at %h:%i');
++--------------------------------------+
+| DATE_FORMAT(NOW(), '%M %D at %h:%i') |
++--------------------------------------+
+| March 17th at 07:10                  |
++--------------------------------------+
+1 row in set (0.01 sec)
+
+
+2: TẠO BẢNG tweets , NHẬP LIỆU VÀ TRUY VẤN
+mysql> SELECT * FROM tweets;
++-------------------------+----------+---------------------+
+| content                 | username | created_at          |
++-------------------------+----------+---------------------+
+| this is my first tweet  | coltscat | 2023-03-17 07:18:46 |
+| this is my second tweet | coltscat | 2023-03-17 07:18:46 |
++-------------------------+----------+---------------------+
+2 rows in set (0.00 sec)
+NHẬN XÉT CỘT created_at: THỜI GIAN ĐƯỢC TẠO TỰ ĐỘNG VÀ ĐỒNG THỜI KHI NHẬP DỮ LIỆU

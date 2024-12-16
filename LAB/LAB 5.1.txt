@@ -1,0 +1,135 @@
+root@goorm:/workspace/MySQL_FX18957# ls
+README.md  goorm.manifest  main.js
+root@goorm:/workspace/MySQL_FX18957# ls
+README.md  book_data.sql  goorm.manifest  main.js
+root@goorm:/workspace/MySQL_FX18957# mysql-ctl cli
+ * Stopping MySQL database server mysqld
+   ...done.
+
+MySQL 5.7 database added.  Please make note of these credentials:
+
+       Root User: root
+   Database Name: mysql
+
+ * Starting MySQL database server mysqld
+No directory, logging in with HOME=/
+   ...done.
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 4
+Server version: 5.7.41-0ubuntu0.18.04.1 (Ubuntu)
+
+Copyright (c) 2000, 2023, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> select 10 !=10;
++---------+
+| 10 !=10 |
++---------+
+|       0 |
++---------+
+1 row in set (0.00 sec)
+//Sử dụng toán tử '!=' : khác
+
+mysql> SELECT 15 > 14 && 99 -  5 <= 94;
++--------------------------+
+| 15 > 14 && 99 -  5 <= 94 |
++--------------------------+
+|                        1 |
++--------------------------+
+1 row in set (0.00 sec)
+//Sử dụng toán tử '>' : lớn hơn; toán tử '<=' : nhỏ hơn hoặc bằng; toán tử '&&' : AND (và)
+
+mysql>SELECT 1 IN (5,3) || 9 BETWEEN 8 AND 10;
++----------------------------------+
+| 1 IN (5,3) || 9 BETWEEN 8 AND 10 |
++----------------------------------+
+|                                1 |
++----------------------------------+
+1 row in set (0.00 sec)
+//Sử dụng toán tử 'IN ()' : Hoặc (); toán tử '||' : Hoặc; BETWEEN ... AND ... : Trong đoạn
+
+
+#Yêu cầu 2: Hãy viết câu truy vấn để thực hiện 6 yêu cầu sau:
+
+#Truy vấn tất cả cuốn sách được xuất bản (released_year) trước năm 1980
+
+mysql> SELECT * FROM books WHERE released_year < 1980;
++---------+-------------+--------------+--------------+---------------+----------------+-------+
+| book_id | title       | author_fname | author_lname | released_year | stock_quantity | pages |
++---------+-------------+--------------+--------------+---------------+----------------+-------+
+|      14 | Cannery Row | John         | Steinbeck    |          1945 |             95 |   181 |
++---------+-------------+--------------+--------------+---------------+----------------+-------+
+1 row in set (0.00 sec)
+
+# Truy vấn tất cả cuốn sách được viết bởi Eggers và Chabon.
+mysql> SELECT * FROM books WHERE author_lname IN("Eggers","Chabon");
++---------+-------------------------------------------+--------------+--------------+---------------+----------------+-------+
+| book_id | title                                     | author_fname | author_lname | released_year | stock_quantity | pages |
++---------+-------------------------------------------+--------------+--------------+---------------+----------------+-------+
+|       5 | A Hologram for the King: A Novel          | Dave         | Eggers       |          2012 |            154 |   352 |
+|       6 | The Circle                                | Dave         | Eggers       |          2013 |             26 |   504 |
+|       7 | The Amazing Adventures of Kavalier & Clay | Michael      | Chabon       |          2000 |             68 |   634 |
+|       9 | A Heartbreaking Work of Staggering Genius | Dave         | Eggers       |          2001 |            104 |   437 |
++---------+-------------------------------------------+--------------+--------------+---------------+----------------+-------+
+4 rows in set (0.00 sec)
+
+# Truy vấn tất cả cuốn sách được viết bởi Lahiri và được xuất bản trước năm 2000
+mysql> SELECT * FROM books WHERE author_lname = "Lahiri" AND released_year <2000;
++---------+-------------------------+--------------+--------------+---------------+----------------+-------+
+| book_id | title                   | author_fname | author_lname | released_year | stock_quantity | pages |
++---------+-------------------------+--------------+--------------+---------------+----------------+-------+
+|       4 | Interpreter of Maladies | Jhumpa       | Lahiri       |          1996 |             97 |   198 |
++---------+-------------------------+--------------+--------------+---------------+----------------+-------+
+1 row in set (0.00 sec)
+
+# Truy vấn tất cả cuốn sách có số trang (pages) nằm trong khoảng từ 100 đến 200 trang:
+mysql> SELECT * FROM books WHERE pages BETWEEN 100 AND 200;
++---------+-----------------------------------------------------+--------------+--------------+---------------+----------------+-------+
+| book_id | title                                               | author_fname | author_lname | released_year | stock_quantity | pages |
++---------+-----------------------------------------------------+--------------+--------------+---------------+----------------+-------+
+|       4 | Interpreter of Maladies                             | Jhumpa       | Lahiri       |          1996 |             97 |   198 |
+|      11 | What We Talk About When We Talk About Love: Stories | Raymond      | Carver       |          1981 |             23 |   176 |
+|      14 | Cannery Row                                         | John         | Steinbeck    |          1945 |             95 |   181 |
++---------+-----------------------------------------------------+--------------+--------------+---------------+----------------+-------+
+3 rows in set (0.00 sec)
+
+# Tạo thêm cột TYPE khi sử dụng SELECT với nguyên tắc sau:
+# Nếu title chứa 'stories' thì TYPE sẽ là 'Short Stories'.
+# Nếu title chứa 'Just Kids' hoặc title 'A Heartbreaking Work of Staggering Genius' thì TYPE sẽ là 'Memoir'.
+# Nếu title không nằm trong hai trường hợp trên thì TYPE sẽ là 'Novel'.
+mysql> SELECT *,
+    ->     CASE
+    ->         WHEN title LIKE "%stories%" THEN "Short Stories"
+    ->         WHEN title LIKE "%Just Kids%" OR title LIKE 'A Heartbreaking Work of Staggering Genius' THEN "Memoir"
+    ->         ELSE "Novel"
+    ->     END AS TYPE
+    ->     FROM books;
++---------+-----------------------------------------------------+--------------+----------------+---------------+----------------+-------+---------------+
+| book_id | title                                               | author_fname | author_lname   | released_year | stock_quantity | pages | TYPE          |
++---------+-----------------------------------------------------+--------------+----------------+---------------+----------------+-------+---------------+
+|       1 | The Namesake                                        | Jhumpa       | Lahiri         |          2003 |             32 |   291 | Novel         |
+|       2 | Norse Mythology                                     | Neil         | Gaiman         |          2016 |             43 |   304 | Novel         |
+|       3 | American Gods                                       | Neil         | Gaiman         |          2001 |             12 |   465 | Novel         |
+|       4 | Interpreter of Maladies                             | Jhumpa       | Lahiri         |          1996 |             97 |   198 | Novel         |
+|       5 | A Hologram for the King: A Novel                    | Dave         | Eggers         |          2012 |            154 |   352 | Novel         |
+|       6 | The Circle                                          | Dave         | Eggers         |          2013 |             26 |   504 | Novel         |
+|       7 | The Amazing Adventures of Kavalier & Clay           | Michael      | Chabon         |          2000 |             68 |   634 | Novel         |
+|       8 | Just Kids                                           | Patti        | Smith          |          2010 |             55 |   304 | Memoir        |
+|       9 | A Heartbreaking Work of Staggering Genius           | Dave         | Eggers         |          2001 |            104 |   437 | Memoir        |
+|      10 | Coraline                                            | Neil         | Gaiman         |          2003 |            100 |   208 | Novel         |
+|      11 | What We Talk About When We Talk About Love: Stories | Raymond      | Carver         |          1981 |             23 |   176 | Short Stories |
+|      12 | Where I'm Calling From: Selected Stories            | Raymond      | Carver         |          1989 |             12 |   526 | Short Stories |
+|      13 | White Noise                                         | Don          | DeLillo        |          1985 |             49 |   320 | Novel         |
+|      14 | Cannery Row                                         | John         | Steinbeck      |          1945 |             95 |   181 | Novel         |
+|      15 | Oblivion: Stories                                   | David        | Foster Wallace |          2004 |            172 |   329 | Short Stories |
+|      16 | Consider the Lobster                                | David        | Foster Wallace |          2005 |             92 |   343 | Novel         |
++---------+-----------------------------------------------------+--------------+----------------+---------------+----------------+-------+---------------+
+16 rows in set (0.00 sec)
+
+mysql>
+

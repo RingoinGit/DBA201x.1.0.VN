@@ -1,0 +1,106 @@
+mysql> UPDATE cats SET name= 'Jack' WHERE name = 'jackson';
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from cats;
++--------+----------------+------------+------+
+| cat_id | name           | breed      | age  |
++--------+----------------+------------+------+
+|      1 | Ringo          | Tabby      |    4 |
+|      2 | Cindy          | Maine Coon |   10 |
+|      3 | Dumbledore     | Maine Coon |   11 |
+|      4 | Egg            | Persian    |    4 |
+|      5 | Misty          | Tabby      |   13 |
+|      6 | George Michael | Ragdoll    |    9 |
+|      7 | Jack           | Sphynx     |    7 |
++--------+----------------+------------+------+
+7 rows in set (0.00 sec)
+
+mysql>
+
+mysql> UPDATE cats SET name= 'Bitish Shorthair' WHERE name = 'Ringo';
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from cats;
++--------+------------------+------------+------+
+| cat_id | name             | breed      | age  |
++--------+------------------+------------+------+
+|      1 | Bitish Shorthair | Tabby      |    4 |
+|      2 | Cindy            | Maine Coon |   10 |
+|      3 | Dumbledore       | Maine Coon |   11 |
+|      4 | Egg              | Persian    |    4 |
+|      5 | Misty            | Tabby      |   13 |
+|      6 | George Michael   | Ragdoll    |    9 |
+|      7 | Jack             | Sphynx     |    7 |
++--------+------------------+------------+------+
+7 rows in set (0.01 sec)
+
+mysql>
+
+
+mysql> UPDATE cats SET age = 12 WHERE breed = 'Maine Coon';
+Query OK, 2 rows affected (0.00 sec)
+Rows matched: 2  Changed: 2  Warnings: 0
+
+mysql> select * from cats;
++--------+------------------+------------+------+
+| cat_id | name             | breed      | age  |
++--------+------------------+------------+------+
+|      1 | Bitish Shorthair | Tabby      |    4 |
+|      2 | Cindy            | Maine Coon |   12 |
+|      3 | Dumbledore       | Maine Coon |   12 |
+|      4 | Egg              | Persian    |    4 |
+|      5 | Misty            | Tabby      |   13 |
+|      6 | George Michael   | Ragdoll    |    9 |
+|      7 | Jack             | Sphynx     |    7 |
++--------+------------------+------------+------+
+7 rows in set (0.00 sec)
+
+mysql>
+
+
+
+mysql> DELETE FROM cats where age = 4;
+Query OK, 2 rows affected (0.07 sec)
+
+mysql> select * from cats;
++--------+----------------+------------+------+
+| cat_id | name           | breed      | age  |
++--------+----------------+------------+------+
+|      2 | Cindy          | Maine Coon |   12 |
+|      3 | Dumbledore     | Maine Coon |   12 |
+|      5 | Misty          | Tabby      |   13 |
+|      6 | George Michael | Ragdoll    |    9 |
+|      7 | Jack           | Sphynx     |    7 |
++--------+----------------+------------+------+
+5 rows in set (0.00 sec)
+
+mysql>
+
+
+
+mysql> DELETE FROM cats where cat_id = age;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from cats;
++--------+----------------+------------+------+
+| cat_id | name           | breed      | age  |
++--------+----------------+------------+------+
+|      2 | Cindy          | Maine Coon |   12 |
+|      3 | Dumbledore     | Maine Coon |   12 |
+|      5 | Misty          | Tabby      |   13 |
+|      6 | George Michael | Ragdoll    |    9 |
++--------+----------------+------------+------+
+4 rows in set (0.00 sec)
+
+mysql>
+
+
+mysql> DELETE FROM cats;
+Query OK, 4 rows affected (0.02 sec)
+
+mysql> select * from cats;
+Empty set (0.00 sec)
+
+mysql>

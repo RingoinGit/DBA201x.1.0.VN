@@ -1,0 +1,33 @@
+
+mysql> create database cat_app;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> use cat_app;
+Database changed
+mysql> create table pastries ( name varchar(50), quantity int);
+Query OK, 0 rows affected (0.13 sec)
+
+mysql> show tables;
++-------------------+
+| Tables_in_cat_app |
++-------------------+
+| pastries          |
++-------------------+
+1 row in set (0.00 sec)
+
+mysql> desc pastries;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| name     | varchar(50) | YES  |     | NULL    |       |
+| quantity | int(11)     | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+2 rows in set (0.09 sec)
+
+mysql> drop table pastries;
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> show tables;
+Empty set (0.00 sec)
+
+mysql>

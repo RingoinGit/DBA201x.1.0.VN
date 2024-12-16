@@ -1,0 +1,100 @@
+mysql> SELECT  * from shirts
+    -> ;
++----------+------------+-------+------------+-----------+
+| shirt_id | article    | color | shirt_size | last_worn |
++----------+------------+-------+------------+-----------+
+|        1 | t-shirt    | white | S          |        10 |
+|        2 | t-shirt    | green | S          |       200 |
+|        3 | polo shirt | black | M          |        10 |
+|        4 | tank top   | blue  | S          |        50 |
+|        5 | t-shirt    | pink  | S          |         0 |
+|        6 | polo shirt | red   | M          |         5 |
+|        7 | tank top   | white | S          |       200 |
+|        8 | tank top   | blue  | M          |        15 |
++----------+------------+-------+------------+-----------+
+8 rows in set (0.00 sec)
+
+mysql>
+
+mysql> show tables;
++---------------------+
+| Tables_in_shirts_db |
++---------------------+
+| shirts              |
++---------------------+
+1 row in set (0.00 sec)
+
+mysql>
+
+mysql> INSERT INTO shirts (article, shirt_size,last_worn) VALUES ('polo shirt','M',50);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> SELECT article,color FROM shirts;
++------------+-------+
+| article    | color |
++------------+-------+
+| t-shirt    | white |
+| t-shirt    | green |
+| polo shirt | black |
+| tank top   | blue  |
+| t-shirt    | pink  |
+| polo shirt | red   |
+| tank top   | white |
+| tank top   | blue  |
+| polo shirt | NULL  |
++------------+-------+
+9 rows in set (0.00 sec)
+
+mysql>
+
+mysql> SELECT article,color,shirt_size,last_worn FROM shirts WHERE shirt_size = 'M';
++------------+-------+------------+-----------+
+| article    | color | shirt_size | last_worn |
++------------+-------+------------+-----------+
+| polo shirt | black | M          |        10 |
+| polo shirt | red   | M          |         5 |
+| tank top   | blue  | M          |        15 |
+| polo shirt | NULL  | M          |        50 |
++------------+-------+------------+-----------+
+4 rows in set (0.00 sec)
+
+mysql>
+
+mysql> UPDATE shirts SET shirt_size = 'L' WHERE article = 'polo shirt';
+Query OK, 3 rows affected (0.01 sec)
+Rows matched: 3  Changed: 3  Warnings: 0
+
+mysql> SELECT * FROM shirts;
++----------+------------+-------+------------+-----------+
+| shirt_id | article    | color | shirt_size | last_worn |
++----------+------------+-------+------------+-----------+
+|        1 | t-shirt    | white | S          |        10 |
+|        2 | t-shirt    | green | S          |       200 |
+|        3 | polo shirt | black | L          |        10 |
+|        4 | tank top   | blue  | S          |        50 |
+|        5 | t-shirt    | pink  | S          |         0 |
+|        6 | polo shirt | red   | L          |         5 |
+|        7 | tank top   | white | S          |       200 |
+|        8 | tank top   | blue  | M          |        15 |
+|        9 | polo shirt | NULL  | L          |         50|
++----------+------------+-------+------------+-----------+
+9 rows in set (0.00 sec)
+
+mysql> DELETE FROM shirts WHERE last_worn = 200;
+Query OK, 2 rows affected (0.01 sec)
+
+mysql> SELECT * FROM shirts;
++----------+------------+-------+------------+-----------+
+| shirt_id | article    | color | shirt_size | last_worn |
++----------+------------+-------+------------+-----------+
+|        1 | t-shirt    | white | S          |        10 |
+|        3 | polo shirt | black | L          |        10 |
+|        4 | tank top   | blue  | S          |        50 |
+|        5 | t-shirt    | pink  | S          |         0 |
+|        6 | polo shirt | red   | L          |         5 |
+|        8 | tank top   | blue  | M          |        15 |
+|        9 | polo shirt | NULL  | M          |        50 |
++----------+------------+-------+------------+-----------+
+7 rows in set (0.00 sec)
+
+mysql>

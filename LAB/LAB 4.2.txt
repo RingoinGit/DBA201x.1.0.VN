@@ -1,0 +1,196 @@
+//CONCAT
+mysql> SELECT CONCAT(author_fname," ", author_lname) AS "full name" FROM books;
++----------------------+
+| full name            |
++----------------------+
+| Jhumpa Lahiri        |
+| Neil Gaiman          |
+| Neil Gaiman          |
+| Jhumpa Lahiri        |
+| Dave Eggers          |
+| Dave Eggers          |
+| Michael Chabon       |
+| Patti Smith          |
+| Dave Eggers          |
+| Neil Gaiman          |
+| Raymond Carver       |
+| Raymond Carver       |
+| Don DeLillo          |
+| John Steinbeck       |
+| David Foster Wallace |
+| David Foster Wallace |
++----------------------+
+16 rows in set (0.00 sec)
+
+//CONCAT_WS
+mysql> SELECT CONCAT_WS(" - ",author_fname, author_lname) AS "full name" FROM books;
++------------------------+
+| full name              |
++------------------------+
+| Jhumpa - Lahiri        |
+| Neil - Gaiman          |
+| Neil - Gaiman          |
+| Jhumpa - Lahiri        |
+| Dave - Eggers          |
+| Dave - Eggers          |
+| Michael - Chabon       |
+| Patti - Smith          |
+| Dave - Eggers          |
+| Neil - Gaiman          |
+| Raymond - Carver       |
+| Raymond - Carver       |
+| Don - DeLillo          |
+| John - Steinbeck       |
+| David - Foster Wallace |
+| David - Foster Wallace |
++------------------------+
+16 rows in set (0.00 sec)
+
+//SUBSTRING
+mysql> SELECT SUBSTRING("data analyst",-7);
++------------------------------+
+| SUBSTRING("data analyst",-7) |
++------------------------------+
+| analyst                      |
++------------------------------+
+1 row in set (0.00 sec)
+
+//REPLACE
+mysql> SELECT REPLACE("data analyst","analyst","science");
++---------------------------------------------+
+| REPLACE("data analyst","analyst","science") |
++---------------------------------------------+
+| data science                                |
++---------------------------------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT REPLACE(title," ","->") FROM books;
++--------------------------------------------------------------+
+| REPLACE(title," ","->")                                      |
++--------------------------------------------------------------+
+| The->Namesake                                                |
+| Norse->Mythology                                             |
+| American->Gods                                               |
+| Interpreter->of->Maladies                                    |
+| A->Hologram->for->the->King:->A->Novel                       |
+| The->Circle                                                  |
+| The->Amazing->Adventures->of->Kavalier->&->Clay              |
+| Just->Kids                                                   |
+| A->Heartbreaking->Work->of->Staggering->Genius               |
+| Coraline                                                     |
+| What->We->Talk->About->When->We->Talk->About->Love:->Stories |
+| Where->I'm->Calling->From:->Selected->Stories                |
+| White->Noise                                                 |
+| Cannery->Row                                                 |
+| Oblivion:->Stories                                           |
+| Consider->the->Lobster                                       |
++--------------------------------------------------------------+
+16 rows in set (0.00 sec)
+
+//REVERSE
+mysql> SELECT REVERSE("data analyst");
++-------------------------+
+| REVERSE("data analyst") |
++-------------------------+
+| tsylana atad            |
++-------------------------+
+1 row in set (0.00 sec)
+
+//CHAR_LENGTH
+mysql> SELECT CHAR_LENGTH("data analyst");
++-----------------------------+
+| CHAR_LENGTH("data analyst") |
++-----------------------------+
+|                          12 |
++-----------------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT CHAR_LENGTH(title) FROM books;
++--------------------+
+| CHAR_LENGTH(title) |
++--------------------+
+|                 12 |
+|                 15 |
+|                 13 |
+|                 23 |
+|                 32 |
+|                 10 |
+|                 41 |
+|                  9 |
+|                 41 |
+|                  8 |
+|                 51 |
+|                 40 |
+|                 11 |
+|                 11 |
+|                 17 |
+|                 20 |
++--------------------+
+16 rows in set (0.00 sec)
+
+//UPPER
+mysql> SELECT UPPER("database");
++-------------------+
+| UPPER("database") |
++-------------------+
+| DATABASE          |
++-------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT UPPER(title) FROM books;
++-----------------------------------------------------+
+| UPPER(title)                                        |
++-----------------------------------------------------+
+| THE NAMESAKE                                        |
+| NORSE MYTHOLOGY                                     |
+| AMERICAN GODS                                       |
+| INTERPRETER OF MALADIES                             |
+| A HOLOGRAM FOR THE KING: A NOVEL                    |
+| THE CIRCLE                                          |
+| THE AMAZING ADVENTURES OF KAVALIER & CLAY           |
+| JUST KIDS                                           |
+| A HEARTBREAKING WORK OF STAGGERING GENIUS           |
+| CORALINE                                            |
+| WHAT WE TALK ABOUT WHEN WE TALK ABOUT LOVE: STORIES |
+| WHERE I'M CALLING FROM: SELECTED STORIES            |
+| WHITE NOISE                                         |
+| CANNERY ROW                                         |
+| OBLIVION: STORIES                                   |
+| CONSIDER THE LOBSTER                                |
++-----------------------------------------------------+
+16 rows in set (0.00 sec)
+
+//LOWER
+mysql> SELECT LOWER("DATABASE");
++-------------------+
+| LOWER("DATABASE") |
++-------------------+
+| database          |
++-------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT LOWER(title) FROM books;
++-----------------------------------------------------+
+| LOWER(title)                                        |
++-----------------------------------------------------+
+| the namesake                                        |
+| norse mythology                                     |
+| american gods                                       |
+| interpreter of maladies                             |
+| a hologram for the king: a novel                    |
+| the circle                                          |
+| the amazing adventures of kavalier & clay           |
+| just kids                                           |
+| a heartbreaking work of staggering genius           |
+| coraline                                            |
+| what we talk about when we talk about love: stories |
+| where i'm calling from: selected stories            |
+| white noise                                         |
+| cannery row                                         |
+| oblivion: stories                                   |
+| consider the lobster                                |
++-----------------------------------------------------+
+16 rows in set (0.00 sec)
+
+
+

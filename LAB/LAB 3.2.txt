@@ -1,0 +1,82 @@
+mysql> CREATE TABLE unique_cats (cat_id INT NOT NULL, name VARCHAR(100), age INT , PRIMARY KEY (cat_id));
+Query OK, 0 rows affected (0.08 sec)
+
+mysql> INSERT INTO unique_cats (cat_id,name,age)
+    -> VALUES(1,'Fred',23)
+    -> ,(2,'Louis',3)
+    -> ,(3,'James',3);
+Query OK, 3 rows affected (0.01 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> CREATE TABLE unique_cats2 (cat_id INT NOT NULL AUTO_INCREMENT,name VARCHAR(100), age INT, PRIMARY KEY (cat_id));
+Query OK, 0 rows affected (0.12 sec)
+
+mysql> INSERT INTO unique_cats2(name,age)
+    -> VALUES('Skippy',4)
+    -> ,('Jiff',5)
+    -> ,('Jiff',3)
+    -> ,('Jiff',3)
+    -> ,('Jiff',3)
+    -> ,('Skippy',4);
+Query OK, 6 rows affected (0.01 sec)
+Records: 6  Duplicates: 0  Warnings: 0
+
+mysql> desc unique_cats2;
++--------+--------------+------+-----+---------+----------------+
+| Field  | Type         | Null | Key | Default | Extra          |
++--------+--------------+------+-----+---------+----------------+
+| cat_id | int(11)      | NO   | PRI | NULL    | auto_increment |
+| name   | varchar(100) | YES  |     | NULL    |                |
+| age    | int(11)      | YES  |     | NULL    |                |
++--------+--------------+------+-----+---------+----------------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT * FROM unique_cats2;
++--------+--------+------+
+| cat_id | name   | age  |
++--------+--------+------+
+|      1 | Skippy |    4 |
+|      2 | Jiff   |    5 |
+|      3 | Jiff   |    3 |
+|      4 | Jiff   |    3 |
+|      5 | Jiff   |    3 |
+|      6 | Skippy |    4 |
++--------+--------+------+
+6 rows in set (0.00 sec)
+
+//Nhan xet: truong cat_id tu dong them vao va tang gia tri sau moi lan insert.
+
+
+
+
+mysql>  CREATE TABLE employee(id INT NOT NULL AUTO_INCREMENT, first_name VARCHAR(255) NOT NULL, last_name VARCHAR(255) NOT NULL, middle_name VARCHAR(255) NOT NULL, age INT NOT NULL, curr
+ent_status VARCHAR(255) NOT NULL DEFAULT 'employed', PRIMARY KEY (id));
+Query OK, 0 rows affected (0.08 sec)
+mysql> INSERT INTO employee(first_name,last_name,age)
+    -> VALUES('Dora','Smith',58);
+Query OK, 1 row affected, 1 warning (0.02 sec)
+
+mysql> desc employee;
++----------------+--------------+------+-----+----------+----------------+
+| Field          | Type         | Null | Key | Default  | Extra          |
++----------------+--------------+------+-----+----------+----------------+
+| id             | int(11)      | NO   | PRI | NULL     | auto_increment |
+| first_name     | varchar(255) | NO   |     | NULL     |                |
+| last_name      | varchar(255) | NO   |     | NULL     |                |
+| middle_name    | varchar(255) | NO   |     | NULL     |                |
+| age            | int(11)      | NO   |     | NULL     |                |
+| current_status | varchar(255) | NO   |     | employed |                |
++----------------+--------------+------+-----+----------+----------------+
+6 rows in set (0.00 sec)
+
+mysql> SELECT * FROM employee;
++----+------------+-----------+-------------+-----+----------------+
+| id | first_name | last_name | middle_name | age | current_status |
++----+------------+-----------+-------------+-----+----------------+
+|  1 | Dora       | Smith     |             |  58 | employed       |
++----+------------+-----------+-------------+-----+----------------+
+
+//Nhan xet: cot id tu dong duoc them vao gia tri, middle_name khong co gia tri,current_status tu dong them vao gia tri employed.
+1 row in set (0.00 sec)
+
+mysql>
