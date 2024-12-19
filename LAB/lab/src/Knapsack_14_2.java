@@ -11,8 +11,8 @@ public class Knapsack_14_2 {
                 if (i == 0 || j == 0) {
                     result[i][j] = 0; //thỏi vàng 0, sức nặng 0
                 } else if (w[i - 1] <= j) {
-                    //Thỏi vàng thứ i ,
-                    result[i][j] = Math.max(result[i - 1][j], result[i - 1][j - w[i    - 1] + w[i]);
+                    //Thỏi vàng thứ i , có trọng lượng w[i - 1]
+                    result[i][j] = Math.max(result[i - 1][j], result[i - 1][j - w[i    - 1]] + w[i-1]);
                 } else {
                     result[i][j] = result[i - 1][j];
                 }
