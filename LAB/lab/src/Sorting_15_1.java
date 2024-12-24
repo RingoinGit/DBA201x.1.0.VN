@@ -3,38 +3,38 @@ import java.util.*;
 
 public class Sorting_15_1 {
     private static Random random = new Random();
-
     private static int[] partition3(int[] a, int l, int r) {
         //write your code here
         int piv1 = a[l];
-        int piv2 = a[r];
-        if (piv1 > piv2) {
-            int t = piv1;
-            piv1 = piv2;
-            piv2 = t;
-            a[l] = piv1;
-            a[r] = piv2;
+        if (r - l == 1 && piv1 > a[r]) {
+            a[l] = a[r];
+            a[r] = piv1;
+            return new int[]{r, r};
         }
-
         int i = l;
-        int j = l;
+        int j = l + 1;
         int k = r;
+
         while (j <= k) {
+            while (a[j] > piv1) {
+                int t = a[k];
+                a[k] = a[j];
+                a[j] = t;
+                k--;
+            }
             if (a[j] < piv1) {
-                int t = a[i];
+                int t = a[++i];
                 a[i] = a[j];
                 a[j] = t;
-                i++;
-            } else if (a[j] >= piv2) {
-                int t = a[j];
-                a[j] = a[k];
-                a[k] = t;
-                k--;
             }
             j++;
         }
-        return new int[]{i, k};
-
+        //Cập nhập lại vị trí của piv1
+        if (i > l) {
+            a[l] = a[i];
+            a[i] = piv1;
+        }
+        return new int[]{--i, k};
     }
 
     private static int partition2(int[] a, int l, int r) {
@@ -58,19 +58,16 @@ public class Sorting_15_1 {
         if (l >= r || l < 0 || r >= a.length) {
             return;
         }
-        /*int k = random.nextInt(r - l + 1) + l;
+        int k = random.nextInt(r - l + 1) + l;
         int t = a[l];
         a[l] = a[k];
         a[k] = t;
-       */
+
         //use partition3
         //int m = partition2(a, l, r);
         int[] m = partition3(a, l, r);
-        randomizedQuickSort(a, l, m[0] - 1);
-        randomizedQuickSort(a, m[0], m[1]);
-        randomizedQuickSort(a, m[1] + 1, r);
-
-
+        randomizedQuickSort(a, l, m[0]);
+        randomizedQuickSort(a, m[1], r);
     }
 
     public static void main(String[] args) {
